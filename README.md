@@ -3,8 +3,8 @@ Message Passing Interface (MPI) plays a crucial role in distributed memory paral
 Overall, our approach represents a significant step forward in advising MPI code through distributed memory systems writing, which can save valuable time and resources for software developers and researchers.
           
 ## Desired Objective  ##
-![](images/objective.PNG)
-A data-oriented workflow of the MPI-rical system, exemplified by a distributed Pi calculation code: Given a corpus of MPI codes, a subset of the original dataset is created --- Removed - Locations [R-L] --- in which the MPI functions are replaced by a void and the original locations are not preserved. This is also done to the xSBT representations. Accordingly, the subset [R-L] is used to train a translation model, SPT-Code, which will eventually predict the desired MPI classification for new samples of codes given in those fashions. As such, MPI-rical is useful in easing the writing of MPI codes in IDEs.
+![](images/heuristics.png)
+A data-oriented workflow of the MPI-rical system, exemplified by a distributed Pi calculation code: Given a corpus of MPI codes, an Heuristic subset of the original dataset is created - Functions Removed (FR) & Structual Changes (FRSC) - in which the MPI functions are replaced by a void and the original locations are not preserved and functions like MPI_Reduce are replaced with their serial version - a loop with the proper mathematical operation. This is also done to the xSBT representations. Accordingly, the subset FRSC is used to train a translation model, SPT-Code, which will eventually predict the desired MPI classification for new samples of codes given in those fashions. As such, MPI-rical is useful in easing the writing of MPI codes in IDEs. The desired objective is to generate the left code out of the right.
 
 ## MPI-rical Training and Evaluation  ##
 ![](images/model.PNG)
@@ -43,6 +43,9 @@ If you found these codes useful for your research, please consider citing: https
 
 ## Dataset
 The corpus is located [here](https://drive.google.com/file/d/1lRTSbh9aitI4BdWxPI8reLpJV4WnlIWQ/view?usp=sharing)
+
+The Heuristics (FRSC) dataset is loacted [here](https://drive.google.com/file/d/1rpIQHPDbsmVIo-U5bFmpsptjLksP2_ZQ/view?usp=sharing)
+
 It contains folders in the following tree structure:
 ```
 ├── User1
@@ -92,11 +95,14 @@ To evaluate the models activate the SPTcode environment and enter the source fol
 conda activate SPTcode
 cd Desktop/MPI-rical/SPT-Code/Source
 ```
-Download the MPI-rical model [here](https://drive.google.com/file/d/1usQHuqN7V0QbBx0VF23vNqmGgEQdsgmE/view?usp=drive_link).
+Download the MPI-rical FR model [here](https://drive.google.com/file/d/1usQHuqN7V0QbBx0VF23vNqmGgEQdsgmE/view?usp=drive_link).
+
+Download the MPI-rical FRSC model [here](https://drive.google.com/file/d/1_Paoh21XEaXa3PiYbmh12C_BtMJ1sCkj/view?usp=sharing)
+
 Move it to the SPT-code/outputs folder and then run the following:
-* For evaluating Translation [R-L]:
+* For evaluating FRSC:
 ```
-python main.py --only-test --task translation --translation-source-language serial_c --translation-target-language mpi_c --no-nl --batch-size 32 --max-code-len 320 --trained-vocab '/home/nadavsc/LIGHTBITS/SPT-Code/dataset/pre_trained/vocabs' --trained-model '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_translation/models'
+python main.py --only-test --task translation --translation-source-language serial_c --translation-target-language mpi_c --no-nl --batch-size 32 --max-code-len 320 --trained-vocab '/home/nadavsc/LIGHTBITS/SPT-Code/dataset/pre_trained/vocabs' --trained-model '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_heuristics/models'
 ```
 Make sure to insert the right paths of both the model itself and the pre trained vocabs.
 
