@@ -46,9 +46,9 @@ def F1_calc(results_path, common_core=False):
 if __name__ == "__main__":
     # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/benchmark_translation_placeholder/translation_test_results.txt'
     # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/benchmark_translation_heuristics/translation_test_results.txt'
-    results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/benchmark_completion_placeholder/completion_test_results.txt'
+    # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/benchmark_completion_placeholder/completion_test_results.txt'
     # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_close_placeholder_translation/translation_test_results.txt'
-    # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_close_heuristics_translation/translation_test_results.txt'
+    results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_close_heuristics_translation/translation_test_results.txt'
     # results_path = '/home/nadavsc/LIGHTBITS/SPT-Code/outputs/5_epochs_320_close_placeholder_completion/completion_test_results.txt'
     F1_calc(results_path, common_core=False)
 
